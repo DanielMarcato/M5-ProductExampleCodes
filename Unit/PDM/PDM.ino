@@ -41,7 +41,7 @@ bool InitI2SSpakerOrMic(int mode)
         .sample_rate = 44100,
         .bits_per_sample = I2S_BITS_PER_SAMPLE_16BIT, // is fixed at 12bit, stereo, MSB
         .channel_format = I2S_CHANNEL_FMT_ONLY_RIGHT,
-        .communication_format = I2S_COMM_FORMAT_I2S,
+        .communication_format = I2S_COMM_FORMAT_STAND_I2S,
         .intr_alloc_flags = ESP_INTR_FLAG_LEVEL1,
         .dma_buf_count = 2,
         .dma_buf_len = 128,
@@ -59,6 +59,7 @@ bool InitI2SSpakerOrMic(int mode)
     pin_config.ws_io_num    = PIN_CLK;
     pin_config.data_out_num = I2S_PIN_NO_CHANGE;
     pin_config.data_in_num  = PIN_DATA;
+    pin_config.mck_io_num = GPIO_NUM_0;
 
     //Serial.println("Init i2s_set_pin");
     i2s_set_pin(I2S_NUM_0, &pin_config);
